@@ -10,9 +10,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://payable-harley-practika-62b11632.koyeb.app")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedOrigins("*")
+                .maxAge(3600L)
+                .allowedMethods("*")
                 .allowedHeaders("*")
+                .exposedHeaders("Upgrade")
                 .allowCredentials(true);
     }
 }
