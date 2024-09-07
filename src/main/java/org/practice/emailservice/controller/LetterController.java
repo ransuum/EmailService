@@ -32,7 +32,7 @@ public class LetterController {
     @Operation(summary = "Send letter to user", description = "Write the email you want to send to(without file(soon))")
     @SecurityRequirement(name = "basicAuth")
     public ResponseEntity<LetterDto> sendLetter(@RequestBody @Valid SendLetterRequest sendLetterRequest,
-                                                @RequestPart(value = "files", required = false) @Parameter(description = "Files to attach") MultipartFile[] files) {
+                                                @RequestParam(value = "files", required = false) MultipartFile[] files) {
         try {
             return new ResponseEntity<>(letterService.sendLetter(sendLetterRequest, files), HttpStatus.CREATED);
         } catch (IOException e) {
