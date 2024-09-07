@@ -2,6 +2,7 @@ package org.practice.emailservice.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +21,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +32,6 @@ import java.util.List;
 public class UsersController {
 
     private final UsersService usersService;
-    private final LogoutHandlerService logoutHandlerService;
 
     @PostMapping("/sign-in")
     @Operation(summary = "Authenticate user", security = @SecurityRequirement(name = "basicAuth"))
@@ -53,6 +52,7 @@ public class UsersController {
     }
 
     @PostMapping("/sign-up")
+    @Tag(name = "Register User", description = "Email should end with seeyaa.com")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest,
                                           BindingResult bindingResult, HttpServletResponse httpServletResponse) {
         if (bindingResult.hasErrors()) {
