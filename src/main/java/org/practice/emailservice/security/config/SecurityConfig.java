@@ -154,7 +154,7 @@ public class SecurityConfig {
         return httpSecurity
                 .securityMatcher(new AntPathRequestMatcher("/sign-up/**"))
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth ->
                         auth.anyRequest().permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
