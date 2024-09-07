@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.practice.emailservice.enums.BanType;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.Instant;
@@ -31,6 +32,10 @@ public class BanUsers {
     private Users personalAccount;
 
     private String reason;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BanType banType;
 
     @ManyToOne
     @JoinColumn(name = "banUser_id",referencedColumnName = "id")

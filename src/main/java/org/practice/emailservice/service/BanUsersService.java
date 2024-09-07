@@ -35,6 +35,7 @@ public class BanUsersService {
                 .banUser(users)
                 .personalAccount(yourAccount)
                 .reason(banUsers.getReason())
+                .banType(banUsers.getBanType())
                 .banDate(Instant.now())
                 .build();
 

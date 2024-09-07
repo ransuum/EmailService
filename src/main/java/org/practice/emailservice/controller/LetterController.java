@@ -1,6 +1,7 @@
 package org.practice.emailservice.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -9,6 +10,7 @@ import org.practice.emailservice.entity.dto.*;
 import org.practice.emailservice.entity.request.SendLetterRequest;
 import org.practice.emailservice.service.LetterService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +27,11 @@ public class LetterController {
     private final LetterService letterService;
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
-    @PostMapping("/send-letter")
+    @PostMapping(value = "/send-letter", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Send letter to user", description = "Write the email you want to send to")
     @SecurityRequirement(name = "basicAuth")
     public ResponseEntity<LetterDto> sendLetter(@RequestBody @Valid SendLetterRequest sendLetterRequest,
-                                                @RequestParam(value = "files", required = false) MultipartFile[] files) {
+                                                @RequestPart(value = "files", required = false) @Parameter(description = "Files to attach") MultipartFile[] files) {
         try {
             return new ResponseEntity<>(letterService.sendLetter(sendLetterRequest, files), HttpStatus.CREATED);
         } catch (IOException e) {
