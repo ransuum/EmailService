@@ -52,7 +52,7 @@ public class UsersController {
     }
 
     @PostMapping("/sign-up")
-    @Tag(name = "Register User", description = "Email should end with seeyaa.com")
+    @Operation(summary = "Register User", description = "Email should end with seeyaa.com")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest,
                                           BindingResult bindingResult, HttpServletResponse httpServletResponse) {
         if (bindingResult.hasErrors()) {

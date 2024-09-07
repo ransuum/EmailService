@@ -1,5 +1,6 @@
 package org.practice.emailservice.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -25,7 +26,7 @@ public class LetterController {
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
     @PostMapping("/send-letter")
-    @Tag(name = "Send letter to user", description = "Write the email you want to send to")
+    @Operation(summary = "Send letter to user", description = "Write the email you want to send to")
     @SecurityRequirement(name = "basicAuth")
     public ResponseEntity<LetterDto> sendLetter(@RequestBody @Valid SendLetterRequest sendLetterRequest,
                                                 @RequestParam(value = "files", required = false) MultipartFile[] files) {
@@ -52,7 +53,7 @@ public class LetterController {
 
     @DeleteMapping("/from-me/{id}")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
-    @Tag(name = "Delete letter from me", description = "If you have sent a message, you can delete it only for yourself")
+    @Operation(summary = "Delete letter from me", description = "If you have sent a message, you can delete it only for yourself")
     @SecurityRequirement(name = "basicAuth")
     public ResponseEntity<?> deleteLetterFromMe(@PathVariable String id){
         letterService.deleteLetterFromMe(id);
@@ -61,7 +62,7 @@ public class LetterController {
 
     @DeleteMapping("/from-all/{id}")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
-    @Tag(name = "Delete letter from all", description = "If you have sent a message, you can delete it for all")
+    @Operation(summary = "Delete letter from all", description = "If you have sent a message, you can delete it for all")
     @SecurityRequirement(name = "basicAuth")
     public ResponseEntity<?> deleteLetterFromMAll(@PathVariable String id){
         letterService.deleteLetterFromAll(id);
@@ -70,7 +71,7 @@ public class LetterController {
 
     @GetMapping("/get-by-start-ofTopic/{topic}")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
-    @Tag(name = "Get letter", description = "There you can get a letter containing the value of your string")
+    @Operation(summary = "Get letter", description = "There you can get a letter containing the value of your string")
     @SecurityRequirement(name = "basicAuth")
     public ResponseEntity<List<LetterDto>> getLetterByTopicStartOf(@PathVariable("topic") String topic) {
         return ResponseEntity.ok(letterService.getByStartOfTheTopic(topic));
