@@ -27,8 +27,9 @@ public class LetterController {
     private final LetterService letterService;
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
-    @PostMapping(value = "/send-letter", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "Send letter to user", description = "Write the email you want to send to")
+//    consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    @PostMapping(value = "/send-letter")
+    @Operation(summary = "Send letter to user", description = "Write the email you want to send to(without file(soon))")
     @SecurityRequirement(name = "basicAuth")
     public ResponseEntity<LetterDto> sendLetter(@RequestBody @Valid SendLetterRequest sendLetterRequest,
                                                 @RequestPart(value = "files", required = false) @Parameter(description = "Files to attach") MultipartFile[] files) {
