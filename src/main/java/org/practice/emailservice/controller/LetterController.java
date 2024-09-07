@@ -30,7 +30,7 @@ public class LetterController {
     @PostMapping(value = "/send-letter", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Send letter to user", description = "Write the email you want to send to")
     @SecurityRequirement(name = "basicAuth")
-    public ResponseEntity<LetterDto> sendLetter(@RequestPart("sendLetterRequest") @Valid SendLetterRequest sendLetterRequest,
+    public ResponseEntity<LetterDto> sendLetter(@RequestBody @Valid SendLetterRequest sendLetterRequest,
                                                 @RequestPart(value = "files", required = false) @Parameter(description = "Files to attach") MultipartFile[] files) {
         try {
             return new ResponseEntity<>(letterService.sendLetter(sendLetterRequest, files), HttpStatus.CREATED);
