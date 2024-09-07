@@ -16,7 +16,6 @@ public class WebConfig implements WebMvcConfigurer {
         org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
 
         config.addAllowedOriginPattern("*");
-        config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
