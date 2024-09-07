@@ -20,7 +20,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .servers(List.of(new Server().url("https://your-koyeb-domain.koyeb.app")))
+                .servers(List.of(new Server().url("https://payable-harley-practika-62b11632.koyeb.app")))
                 .info(new Info().title("Your API").version("1.0.0"))
                 .components(new Components()
                         .addSecuritySchemes("basicAuth", new SecurityScheme()
