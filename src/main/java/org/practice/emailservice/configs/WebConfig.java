@@ -17,6 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
 
         config.addAllowedOriginPattern("*");
         config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
 
