@@ -12,6 +12,7 @@ import org.practice.emailservice.utils.mapper.MapStruct;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Comparator;
@@ -84,6 +85,7 @@ public class BanUsersService {
         banUsersRepo.delete(banUsersEntity);
     }
 
+    @Transactional
     public List<BanUserDto> getBanUsersThatIBanned() {
 
         Users personalAcc = usersRepo.findByEmail(getAuthenticatedUsername()).orElseThrow(()
